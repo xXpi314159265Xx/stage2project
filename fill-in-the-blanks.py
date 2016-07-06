@@ -79,4 +79,14 @@ def prettyPrint():
 		
 prettyPrint()
 
+lists = paragraphs['easy'].split()
+print lists
+answer = []
+for word in lists:
+	print word
+	if word == "___1___":
+		word = word.replace(word, "toot")
+	answer.append(word)
+		
+print " ".join(answer)
 

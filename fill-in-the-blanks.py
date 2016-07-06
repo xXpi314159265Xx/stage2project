@@ -34,17 +34,33 @@ def levelSelect():
             break
     return difficulty
 
-# Wraps printing of paragraphs
+# Take a list as input and wraps printing of paragraphs
 def prettyPrint(list):
 	print ""
 	wrapper = textwrap.wrap(list, width=60)
 	for e in wrapper:
 		print e
 	print ""
-	
-def userAnswers():
-	numberOfGuesses = 5
-	answer = []
+
+# User chooses between 1 and 20 guesses for the quiz
+def numberOfGuesses():
+	while True:
+		try:
+			userGuesses = int(raw_input("How many guesses would you like "
+			"to have in order to try to fill in all of the blanks? \n"))
+			assert (userGuesses < 21 and userGuesses > 0)
+		except ValueError:
+			print "You must enter an integer."
+			continue
+		except AssertionError:
+			print "You may have 1 - 20 guesses."
+			continue
+		else:
+			return userGuesses
+
+# Takes the number of guesses as input and user guesses answers to blanks
+# until all of the blanks are filled or the user runs out of guesses.
+def userAnswers(numberOfGuesses):
 	blank = 1
 	print "You begin the game with " + str(numberOfGuesses) + " guesses."
 	print ""
@@ -70,9 +86,10 @@ def userAnswers():
 				print "Incorrect. You have " + str(numberOfGuesses) + \
 				" guesses left."
 	return numberOfGuesses
-	
+
+# Displays a winning or losing message based on how many guesses are remaining	
 def finalMessage():
-	if numberOfGuesses > 0:
+	if remainingGuesses > 0:
 		print ""
 		print "Congratulations! You filled in all of the blanks."
 		print ""
@@ -81,6 +98,8 @@ def finalMessage():
 		print "Sorry. Out of guesses. Try again."
 		print ""
 
+# Takes the user chosen difficulty as input and returns the list with the 
+# answers for that level.
 def chooseAnswers(difficulty):
 	if difficulty == "easy":
 		return easyAnswers
@@ -95,7 +114,8 @@ difficulty = levelSelect()
 answerList = chooseAnswers(difficulty)
 prettyPrint(paragraphs[difficulty])
 questions = paragraphs[difficulty].split()
-numberOfGuesses = userAnswers()
+numberOfGuesses = numberOfGuesses()
+remainingGuesses = userAnswers(numberOfGuesses)
 finalMessage()
 
 

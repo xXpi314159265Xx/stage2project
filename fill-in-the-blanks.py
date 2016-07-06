@@ -36,17 +36,13 @@ tuple, and ___4___ or can be more complicated such as objects and lambda functio
 
 # If you need help, you can sign up for a 1 on 1 coaching appointment: https://calendly.com/ipnd1-1/20min/
 
-easy = '''The ___1___ value of a number is its ___2___ from zero on the ___3___ line. 
-Absolute value is always ___2___. The absolute value of a positve number is ___2___ 
-and the absolute value of a ___4___ number is ___2___.'''
-
 import textwrap
 
 print "Please select a game difficulty by typing it in."
 print "Possible choices include easy, medium and hard."
 
+# Function returns difficulty of quiz selected by the user.
 def levelSelect():
-    # Function returns difficulty of quiz selected by the user.
     levels = ['easy', 'medium', 'hard']
     while True:
         difficulty = str(raw_input()).lower()
@@ -58,11 +54,25 @@ def levelSelect():
 
 difficulty = levelSelect()
 
-paragraphs = {'easy':"The ___1___ value of a number is its ___2___ from zero on the ___3___ line."
-			"Absolute value is always ___2___. The absolute value of a positive number is ___2___"
-			"and the absolute value of a ___4___ number is ___2___.", 'medium': "test string", 'hard': "hard string"}
+paragraphs = {'easy':"The ___1___ value of a number is its ___2___ from zero " 
+			"on the ___3___ line. Absolute value is always ___2___."
+			" The absolute value of a positive number is ___2___ and the"
+			" absolute value of a ___4___ number is ___2___.", 
+			'medium': "To solve an ___1___ with absolute value you solve "
+			"___2___ equations. Therefore, usually there are ___2___ answers. " 
+			"In order to get these ___2___ answers you have to ___3___ the "
+			"absolute value part of the equation and change the ___3___ of "
+			"the number(s) ___4___ the absolute value symbol.", 
+			'hard': "To solve an absolute value ___1___ you solve two "
+			"___2___, but they are written as ___3___ ___2___."
+			"The symbol < transforms the absolute value ___1___ into "
+			"a ___3___ inequality joined by the word '___4___'. The symbol > "
+			"transforms the absolute value ___1___ into a ___3___ "
+			"inequality joined by the word '___5___'."}
 
+# Wraps printing of paragraphs
 def prettyPrint():
+	print ""
 	wrapper = textwrap.wrap(paragraphs[difficulty], width=60)
 	for e in wrapper:
 		print e

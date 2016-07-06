@@ -36,14 +36,18 @@ tuple, and ___4___ or can be more complicated such as objects and lambda functio
 
 # If you need help, you can sign up for a 1 on 1 coaching appointment: https://calendly.com/ipnd1-1/20min/
 
-easy = '''The ___1___ value of a number is its ___2___ from zero on the ___3___ line. Absolute value is always
-___2___. The absolute value of a positve number is ___2___ and the absolute value of a ___4___ number is ___2___.'''
+easy = '''The ___1___ value of a number is its ___2___ from zero on the ___3___ line. 
+Absolute value is always ___2___. The absolute value of a positve number is ___2___ 
+and the absolute value of a ___4___ number is ___2___.'''
+
+import textwrap
+
+print "Please select a game difficulty by typing it in."
+print "Possible choices include easy, medium and hard."
 
 def levelSelect():
     # Function returns difficulty of quiz selected by the user.
     levels = ['easy', 'medium', 'hard']
-    print "Please select a game difficulty by typing it in."
-    print "Possible choices include easy, medium and hard."
     while True:
         difficulty = str(raw_input()).lower()
         if difficulty not in levels:
@@ -51,6 +55,18 @@ def levelSelect():
         else:
             break
     return difficulty
-print levelSelect()
 
-# testing pythonista commit
+difficulty = levelSelect()
+
+paragraphs = {'easy':"The ___1___ value of a number is its ___2___ from zero on the ___3___ line."
+			"Absolute value is always ___2___. The absolute value of a positive number is ___2___"
+			"and the absolute value of a ___4___ number is ___2___.", 'medium': "test string", 'hard': "hard string"}
+
+def prettyPrint():
+	wrapper = textwrap.wrap(paragraphs[difficulty], width=60)
+	for e in wrapper:
+		print e
+		
+prettyPrint()
+
+

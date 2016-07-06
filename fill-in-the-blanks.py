@@ -23,8 +23,8 @@ easyAnswers = ['absolute', 'distance', 'number', 'positive', 'negative']
 mediumAnswers = ['equation', 'two', 'isolate', 'sign']
 hardAnswers = ['inequality', 'inequalities', 'compound', 'and', 'or']
 
-# Function returns difficulty of quiz selected by the user.
 def levelSelect():
+	'''Function returns difficulty of quiz selected by the user.'''
     levels = ['easy', 'medium', 'hard']
     while True:
         difficulty = str(raw_input()).lower()
@@ -34,16 +34,17 @@ def levelSelect():
             break
     return difficulty
 
-# Take a list as input and wraps printing of paragraphs
+
 def prettyPrint(list):
+	'''Take a list as input and wraps printing of paragraphs.'''
 	print ""
 	wrapper = textwrap.wrap(list, width=60)
 	for e in wrapper:
 		print e
 	print ""
 
-# User chooses between 1 and 20 guesses for the quiz
 def numberOfGuesses():
+	'''User chooses between 1 and 20 guesses for the quiz'''
 	while True:
 		try:
 			userGuesses = int(raw_input("How many guesses would you like "
@@ -58,9 +59,11 @@ def numberOfGuesses():
 		else:
 			return userGuesses
 
-# Takes the number of guesses as input and user guesses answers to blanks
-# until all of the blanks are filled or the user runs out of guesses.
 def userAnswers(numberOfGuesses):
+	'''Takes the number of guesses as input. User guesses answers to blanks
+	until all of the blanks are filled or the user runs out of guesses.
+	Returns guesses remaining.'''
+	global blank
 	blank = 1
 	print "You begin the game with " + str(numberOfGuesses) + " guesses."
 	print ""
@@ -68,27 +71,33 @@ def userAnswers(numberOfGuesses):
 		while numberOfGuesses > 0 and word == "___" + str(blank) + "___":
 			response = raw_input("What is the answer to blank " \
 			+ str(blank) + "\n").lower()
-			if response == answerList[blank-1]:
-				print ""
-				print "Correct!"
-				print ""
-				print "You still have " + str(numberOfGuesses) + " guesses left."
-				print ""
-				while "___" + str(blank) + "___" in questions:
-					index = questions.index("___" + str(blank) + "___")
-					questions[index] = response
-				blank += 1
-				prettyPrint(" ".join(questions))
-			else:
-				numberOfGuesses -= 1
-				print ""
-				prettyPrint(" ".join(questions))
-				print "Incorrect. You have " + str(numberOfGuesses) + \
-				" guesses left."
+			numberOfGuesses = checkResponse(response)
+			print numberOfGuesses
 	return numberOfGuesses
 
-# Displays a winning or losing message based on how many guesses are remaining	
+def checkResponse(response):
+	'''Checks to see if user answer is correct. If so, prints answer
+	and moves to next blank. If not, lowers guesses by 1.'''
+	global blank, numberOfGuesses, questions
+	if response == answerList[blank-1]:
+		print ""
+		print "Correct!\n"
+		print "You still have " + str(numberOfGuesses) + " guesses left.\n"
+		while "___" + str(blank) + "___" in questions:
+			index = questions.index("___" + str(blank) + "___")
+			questions[index] = response
+		blank += 1
+		prettyPrint(" ".join(questions))
+	else:
+		numberOfGuesses -= 1
+		prettyPrint(" ".join(questions))
+		print "Incorrect. You have " + str(numberOfGuesses) + \
+		" guesses left."
+	return numberOfGuesses
+		
 def finalMessage():
+	'''Displays a winning or losing message based on how many
+	guesses are remaining.'''
 	if remainingGuesses > 0:
 		print ""
 		print "Congratulations! You filled in all of the blanks."
@@ -98,9 +107,9 @@ def finalMessage():
 		print "Sorry. Out of guesses. Try again."
 		print ""
 
-# Takes the user chosen difficulty as input and returns the list with the 
-# answers for that level.
 def chooseAnswers(difficulty):
+	'''Takes the user chosen difficulty as input and returns the list with the 
+	answers for that level.'''
 	if difficulty == "easy":
 		return easyAnswers
 	elif difficulty == "medium":
@@ -108,14 +117,19 @@ def chooseAnswers(difficulty):
 	else:
 		return hardAnswers
 
-print "Please select a game difficulty by typing it in."
-print "Possible choices include easy, medium and hard."
-difficulty = levelSelect()
-answerList = chooseAnswers(difficulty)
-prettyPrint(paragraphs[difficulty])
-questions = paragraphs[difficulty].split()
-numberOfGuesses = numberOfGuesses()
-remainingGuesses = userAnswers(numberOfGuesses)
-finalMessage()
+def main():
+	'''Executes main functions of quiz'''
+	global difficulty, answerList, questions, numberOfGuesses, remainingGuesses
+	print "Please select a game difficulty by typing it in."
+	print "Possible choices include easy, medium and hard."
+	difficulty = levelSelect()
+	answerList = chooseAnswers(difficulty)
+	prettyPrint(paragraphs[difficulty])
+	questions = paragraphs[difficulty].split()
+	numberOfGuesses = numberOfGuesses()
+	remainingGuesses = userAnswers(numberOfGuesses)
+	finalMessage()
+	
+main()
 
 

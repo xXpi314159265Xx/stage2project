@@ -71,13 +71,13 @@ paragraphs = {'easy':"The ___1___ value of a number is its ___2___ from zero "
 			"inequality joined by the word '___5___'."}
 
 # Wraps printing of paragraphs
-def prettyPrint():
+def prettyPrint(list):
 	print ""
-	wrapper = textwrap.wrap(paragraphs[difficulty], width=60)
+	wrapper = textwrap.wrap(list, width=60)
 	for e in wrapper:
 		print e
 		
-prettyPrint()
+prettyPrint(paragraphs[difficulty])
 
 lists = paragraphs['easy'].split()
 print lists
@@ -88,5 +88,5 @@ for word in lists:
 		word = word.replace(word, "toot")
 	answer.append(word)
 		
-print " ".join(answer)
+prettyPrint(" ".join(answer))
 

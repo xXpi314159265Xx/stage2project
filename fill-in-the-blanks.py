@@ -55,20 +55,24 @@ def levelSelect():
 difficulty = levelSelect()
 
 paragraphs = {'easy':"The ___1___ value of a number is its ___2___ from zero " 
-			"on the ___3___ line. Absolute value is always ___2___."
-			" The absolute value of a positive number is ___2___ and the"
-			" absolute value of a ___4___ number is ___2___.", 
+			"on the ___3___ line. Absolute value is always ___4___."
+			" The absolute value of a positive number is ___4___ and the"
+			" absolute value of a ___5___ number is ___4___.", 
 			'medium': "To solve an ___1___ with absolute value you solve "
 			"___2___ equations. Therefore, usually there are ___2___ answers. " 
 			"In order to get these ___2___ answers you have to ___3___ the "
-			"absolute value part of the equation and change the ___3___ of "
-			"the number(s) ___4___ the absolute value symbol.", 
+			"absolute value part of the equation and change the ___4___ of "
+			"the number(s) without the absolute value symbol.", 
 			'hard': "To solve an absolute value ___1___ you solve two "
 			"___2___, but they are written as ___3___ ___2___."
 			"The symbol < transforms the absolute value ___1___ into "
 			"a ___3___ inequality joined by the word '___4___'. The symbol > "
 			"transforms the absolute value ___1___ into a ___3___ "
 			"inequality joined by the word '___5___'."}
+
+easyAnswers = ['absolute', 'distance', 'number', 'positive', 'negative']
+mediumAnswers = ['equation', 'two', 'isolate', 'sign']
+hardAnswers = ['inequality', 'inequalities', 'compound', 'and', 'or']
 
 # Wraps printing of paragraphs
 def prettyPrint(list):

@@ -1,3 +1,4 @@
+# coding: utf-8
 # IPND Stage 2 Final Project
 
 # You've built a Mad-Libs game with some help from Sean.
@@ -51,3 +52,5 @@ def levelSelect():
             break
     return difficulty
 print levelSelect()
+
+# testing pythonista commit
